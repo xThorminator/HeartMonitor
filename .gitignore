@@ -6,3 +6,5 @@
 .vscode/launch.json
 .vscode/ipch
 test/
+.DS_Store
+*.DS_Store

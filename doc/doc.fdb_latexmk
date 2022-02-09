@@ -1,7 +1,0 @@
-# Fdb version 3
-["pdflatex"] 0 "doc.tex" "doc.pdf" "doc" 0
-  "doc.aux" 1644431388 8 a94a2480d3289e625eea47cd1b285758 ""
-  "doc.tex" 0 -1 0 ""
-  (generated)
-  "doc.pdf"
-  "doc.log"
