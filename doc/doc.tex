@@ -1,0 +1,47 @@
+\documentclass[10pt, a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage[parfill]{parskip}
+
+\title{Dokumentation: DigitalHeartMonitor}
+\author{}
+\date{Stand: \today}
+
+
+\begin{document}
+\maketitle
+
+\tableofcontents
+
+\section{Einleitung}
+
+\section{Programmteile}
+
+\subsection{\texttt{\#include} - Direktiven}
+Das Programm benötigt drei Header-Bibliotheken:
+\begin{itemize}
+	\item Arduino.h: nur, wenn statt der Arduino-IDE eine andere Entwicklungsumgebung verwendet wird.
+	\item Wire.h: mglw. für LiquidCrystal.h notwendig; kann durch \#ifndef-Guards eingeschränkt sein.
+	\item LiquidCrystal.h
+\end{itemize}	
+
+\subsection{Globale Variablen}
+\begin{itemize}
+	\item AnalogPin A0: definiert Pin A0 als Eingang.
+	\item TimeStep 1000: definiert einen Zeitschritt von 1000 ms pro Durchlauf; kann angepasst werden.
+	\item int lowerlimit = 250; int upperlimit = 750: Werte für die obere oder untere Grenze; konservativ, kann angepasst werden.
+	\item int highs, lows = 0: Anzahl der Limitüberschreitungen pro Zeiteinhei
+\end{itemize}
+
+\subsection{\texttt{void setup()}}
+In der setup-Routine wird nur die serielle Schnittstelle und das LCD-Display initialisiert.
+
+\subsection{\texttt{void loop()}}
+Die loop-Funktion läuft ständig.
+
+Zunächst wird ein uint32\textunderscore t (vorzeichenloser 32 Bit-Long) \texttt{start} mit der derzeitigen Prozessorzeit millis() definiert. Mit diesem wird in der folgenden Schleife die Laufzeit kontrolliert.
+
+Die Funktion \texttt{setLimits()} legt die obere und untere Grenze der aktuellen Pulsschlagsequenz fest.
+Anhand dieser Grenzen wird durch die Funktion \texttt{Diffs()} die Anzahl der oberen und unteren Halbwellen für jeden Schlag gezählt. Die Zählung erfolgt für eine durch eine \texttt{do-while}-Schleife getimte Zeitdauer.
+
+\end{document}
