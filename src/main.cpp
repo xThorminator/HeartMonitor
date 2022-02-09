@@ -37,18 +37,19 @@ void setup() {
 
 void loop()
 {
-  uint32_t start = millis();
+  uint32_t start = millis(); // Starts a Timer for every loop
 
-  SetLimits();
+  SetLimits(); // Sets or updates the limits
   do {
-    Diffs();
+    Diffs(); // Counts low and high waves
   } while(millis() - start < TimeStep); // loops every 1 second
 
-  int bpm = (lows + highs)/2 * 60/TimeStep;
+  int bpm = (lows + highs)/2 * 60/TimeStep; // calculates the BPM and prints to LCD
+  lcd.clear();
   lcd.print(bpm);
 }
 
-///
+// Reads the Signal from AnalogPin
 int ReadOut()
 {
   int sig = analogRead(AnalogPin);
@@ -56,6 +57,7 @@ int ReadOut()
 }
 
 
+// Sweeps the low range
 int SweepLow()
 {
   for (int i = MID_RANGE; i > 0; i--)
@@ -69,6 +71,7 @@ int SweepLow()
   return 0;
 }
 
+// Sweeps the high range
 int SweepHigh()
 {
   for(int i = MID_RANGE; i < 1023; i++)
@@ -82,12 +85,14 @@ int SweepHigh()
   return 0;
 }
 
+// Sets the limits
 void SetLimits()
 {
   lowerlimit = SweepLow();
   upperlimit = SweepHigh();
 }
 
+// Counts the high and low Waves
 void Diffs()
 {
   if (ReadOut() < lowerlimit)
