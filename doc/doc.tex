@@ -21,6 +21,9 @@
 \tableofcontents
 
 \section{Einleitung}
+Dies ist die Dokumentation zur Herstellung und Programmierung eines Herzratenmonitors auf Arduinobasis. Dieser soll als Prototyp für Praktika im BME (Biomedical Engineering) Studiengang dienen.
+
+Das Ziel ist, dass zwei unabhängig von einander arbeitende Teams im Praktikum einen solchen Monitor erstellen. Hierbei soll sich eine Gruppe um die Hardware der Signalverarbeitung und die andere um die Software zur Analyse und Darstellung der Messung kümmern.
 
 \section{Programmteile}
 
@@ -51,4 +54,21 @@ Zunächst wird ein uint32\textunderscore t (vorzeichenloser 32 Bit-Long) \texttt
 Die Funktion \texttt{setLimits()} legt die obere und untere Grenze der aktuellen Pulsschlagsequenz fest.
 Anhand dieser Grenzen wird durch die Funktion \texttt{Diffs()} die Anzahl der oberen und unteren Halbwellen für jeden Schlag gezählt. Die Zählung erfolgt für eine durch eine \texttt{do-while}-Schleife getimte Zeitdauer.
 
+\section{Notizen}
+\begin{itemize}
+    \item Zählung fehlerhaft, da Rauschen, dass minimal unter Limit fällt als Beat erkannt wird
+    
+    Lösungsansatz: Array definieren - die niedrigsten Werte ermitteln - deren Indizes ermitteln - Indizes voneinander abziehen - neues Array 
+    \item Die Anschlüsse am Sensor gut fixieren, da Lötstellen schnell brüchig werden (bspw. Isoliertape).
+    \item Strom bei 5V: 
+    \begin{itemize}
+        \item Arduino - 25mA
+        \item Board - 7mA
+        \item Sensor - 12mA
+        \item LCD - 1mA
+    \end{itemize}
+    \item Sensorplatine vor Kurzschluss durch Haut schützen, da sonst ein stark verrauschtes Signal Auftritt. Z.B. die Kontakte mit Isoliertape oder Schrumpfschlauch isolieren.
+    \item 
+\end{itemize}
+    
 \end{document}
